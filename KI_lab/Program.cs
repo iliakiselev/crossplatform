@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using KI_lab.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<KI_labContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("KI_labContext") ?? throw new InvalidOperationException("Connection string 'KI_labContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
